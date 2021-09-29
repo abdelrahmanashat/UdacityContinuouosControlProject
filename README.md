@@ -122,13 +122,13 @@ The critic is a value-based neural network. It calculates the action-value using
 The input layer of the network receives the state _S<sub>t</sub>_. The first hidden layer receives the output of the first layer and the action _A<sub>t</sub>_. You can add other hidden layers but the first 2 have to be like this. The output of the network is a single neuron representing the action-value _Q<sub>t</sub>(S<sub>t</sub>,A<sub>t</sub>;θ<sup>Q</sup>)_ where _θ<sup>Q</sup>_ are the parameters of the critic neural network.
 
 The neural network architecture of the critic is as follows (shown in Fig.1):
-- The input layer has the same number of states of the enivronment: `22`
+- The input layer has the same number of states of the enivronment: `33`
 - The first hidden layer has `400` neurons. The output of this layer is concatenated with the action input of `4`.
 - The second hidden layer has `300` neurons.
 - The output layer has `1` neuron.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47497135/135061723-7cb4a10b-ae7e-4965-a836-0d2a1b640f80.png" alt="drawing" width="400"/>
+  <img src="https://user-images.githubusercontent.com/47497135/135295905-b5a71118-ff98-471a-a531-4a459e8369b7.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
   <em>Fig.1: Critic Neural Network Architecture</em>
@@ -140,13 +140,13 @@ The actor is a policy-based neural network. It simply maps the state into action
 The input layer receives the state _S<sub>t</sub>_ and the output layer produces the probability distribution of each action _a∈A_ where _A_ is the action space.
 
 The neural network architecture of the critic is as follows (shown in Fig.2):
-- The input layer has the same number of states of the enivronment: `22` neurons.
+- The input layer has the same number of states of the enivronment: `33` neurons.
 - The first hidden layer has `400` neurons.
 - The second hidden layer has `300` neurons.
 - The output layer has the same number of actions of the enivronment: `4` neurons.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47497135/135063995-33579188-39d8-4374-b4b3-71e37e00bfcf.png" alt="drawing" width="300"/>
+  <img src="https://user-images.githubusercontent.com/47497135/135296404-f5bd3034-1b36-423d-9dbd-efe14420c5ec.png" alt="drawing" width="300"/>
 </p>
 <p align="center">
   <em>Fig.2: Actor Neural Network Architecture</em>
