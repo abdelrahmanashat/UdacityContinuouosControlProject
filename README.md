@@ -72,7 +72,9 @@ _(For Windows users)_ Check out this link if you need help with determining if y
 _(For AWS)_ If you'd like to train the agent on AWS (and have not enabled a virtual screen), then please use this link to obtain the "headless" version of the environment. You will not be able to watch the agent without enabling a virtual screen, but you will be able to train the agent. (To watch the agent, you should follow the instructions to enable a virtual screen, and then download the environment for the Linux operating system above.)
 
 ## 3. Explore the Environment
-After you have followed the instructions above, open `Continuous_Control.ipynb` located in the `project_continuous_control/` folder and follow the instructions to learn how to use the Python API to control the agent. The saved weights file is named `checkpoint.pth` located in the `project_navigation/` folder. There is another saved weights file named `BestCheckpoint.pth` that is the result of a 2000 episodes run with an average score of 15.82.
+After you have followed the instructions above, open `Continuous_Control_1.ipynb` located in the `project_continuous_control/one_agent_control/` folder and follow the instructions to learn how to use the Python API to control the agent. The saved weights files are 2 files named `checkpoint_actor.pth` and `checkpoint_critic.pth` located in the `project_continuous_control/one_agent_control/weights/` folder. 
+
+For generalization on many agents, open `Continuous_Control_20.ipynb` located in the `project_continuous_control/twenty_agents_control/` folder and follow the instructions to learn how to use the Python API to control the agent. The saved weights files are 40 files, 2 files for each agent named `checkpoint_actor_{}.pth` and `checkpoint_critic_{}.pth` where `{}` is the number of the agent. For example: checkpoint_actor_15.pth and checkpoint_critic_15.pth are the weights of the 16<sup>th</sup> agent (because the numbering begins from 0). These files are located in the `project_continuous_control/twenty_agent_control/weights/` folder.
 
 ## 4. Implementation Details
 
@@ -225,27 +227,31 @@ Instead of calculating the gradients and updating the parameters ever time step 
 The hyperparameters are:
 * n = `20`
 
+#### Increasing Rewards
+Instead of sticking to the rule of `+0.1` reward we get from the environment in the normal case, we increased the reward to `+1.0` in the case of a single agent. This proved to be very useful and increased the learning speed. In the case of multi-agent, this technique wasn't that useful so we sticked to the normal `+0.1` reward.
+
 ## 5. Plot of Rewards
-For the environment to be solved, the average reward over 100 episodes must reach at least 13. The implementation provided here needed just `501 episodes` to be completed! The average score reached `13.04`. The plot of rewards is shown in _fig.4_.
+### Version 1: One Agent
+For the environment to be solved, the average reward over 100 episodes must reach at least 30. The implementation provided here needed just `350 episodes` to be completed! The average score reached `50` after 469 episodes. The plot of rewards is shown in _fig.3_.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47497135/134100064-bfaaeedc-b14b-4a82-a426-55129f7b798e.png" alt="drawing" width="400"/>
+  <img src="https://user-images.githubusercontent.com/47497135/135594439-b57b93d5-cdcb-49dc-bba8-5a5b72513e84.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
-  <em>Fig.4: Rewards Plot in 501 episodes</em>
+  <em>Fig.3: Rewards Plot in 469 episodes for a single agent</em>
 </p>
 
-Another run of `2000 episodes` gave an average score of `15.82`. The plot of rewards of this long run is shown in _fig.5_.
+### Version 2: Twenty Agents
+For the environment to be solved, the average reward over the 20 agents over 100 episodes must reach at least 30. The implementation provided here needed just `350 episodes` to be completed! The average score reached `50` after 469 episodes. The plot of rewards is shown in _fig.4_.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/47497135/134100605-7a0badc9-dac3-4e1e-baf6-f79e91e73d3d.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
-  <em>Fig.5: Rewards Plot in 2000 episodes</em>
+  <em>Fig.4: Rewards Plot in 500 episodes for 20 agents</em>
 </p>
 
 ## 6. Ideas for Future Work
-Some additional features could be added to provide better performance:
-* __Prioritized Experience Replay:__ Instead of randomly choosing the expriences, we choose them based on how much they affect our learning process. For more information read this paper [here](https://arxiv.org/abs/1511.05952).
-* __Dueling DQN:__ Instead of having one output layer representing the action values, we have 2 output layers representing state values and advantage values. Combining both results the action values. For more information read this paper [here](https://arxiv.org/abs/1511.06581).
+Some additional features could be used to provide better performance:
+* __Different Algorithms:__ According to [this paper](https://arxiv.org/pdf/1604.06778.pdf), which benchmarks the different algorithms based on the applications, using Trust Region Policy Optimization (TRPO) and Truncated Natural Policy Gradient (TNPG) should achieve better performance.
 * __Using images:__ Instead of states, we use the image of the game itself as an input to the neural network. We then have to introduce some changes to the architecture of the netwok. We could use convolutional layers. This will be a more challenging problem.
