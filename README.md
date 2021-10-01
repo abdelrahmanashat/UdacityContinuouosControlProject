@@ -242,10 +242,10 @@ For the environment to be solved, the average reward over 100 episodes must reac
 </p>
 
 ### Version 2: Twenty Agents
-For the environment to be solved, the average reward over the 20 agents over 100 episodes must reach at least 30. The implementation provided here needed just `350 episodes` to be completed! The average score reached `50` after 469 episodes. The plot of rewards is shown in _fig.4_.
+For the environment to be solved, the average reward over the 20 agents over 100 episodes must reach at least 30. The implementation provided here needed just `155 episodes` to be completed! The average score reached `50` after `207 episodes`. The plot of rewards is shown in _fig.4_.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47497135/134100605-7a0badc9-dac3-4e1e-baf6-f79e91e73d3d.png" alt="drawing" width="400"/>
+  <img src="https://user-images.githubusercontent.com/47497135/135637162-c3cebfcf-e62b-4571-8e35-ca31b26cfe96.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
   <em>Fig.4: Rewards Plot in 500 episodes for 20 agents</em>
